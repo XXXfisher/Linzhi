@@ -1,0 +1,267 @@
+:root {
+  /* ===================== 全局颜色变量 =====================
+     --bg: 背景色
+     --text: 主文字颜色
+     --muted: 次要文字颜色（灰色）
+     --line: 边框/分割线颜色（淡淡的黑）
+  ======================================================== */
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #808080;
+  --line: rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box; /* 所有元素的宽高包含 padding 和 border，方便布局 */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #111;
+
+  /* ===================== 隐藏鼠标指针 =====================
+     整个页面默认不显示鼠标光标
+  ======================================================== */
+  cursor: none;
+}
+
+/* ===================== 强制所有可交互元素也隐藏鼠标 ===================== */
+a,
+img,
+button,
+.work-card,
+.work-image-link,
+.work-title,
+* {
+  cursor: none !important;
+}
+
+/* ===================== 自定义鼠标小圆点 ===================== */
+.cursor {
+  position: fixed; /* 固定在屏幕上 */
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%; /* 圆形 */
+  background: #fff;
+  mix-blend-mode: difference; /* 反色效果，让圆点在深色背景上变亮 */
+  pointer-events: none; /* 不阻挡鼠标事件 */
+  z-index: 9999;
+  transform: translate(-999px, -999px); /* 初始放到屏幕外 */
+  transition: width 0.18s ease, height 0.18s ease; /* 放大缩小动画 */
+}
+
+/* ===================== 鼠标悬停时变大 ===================== */
+.cursor-active {
+  width: 24px;
+  height: 24px;
+}
+
+body {
+  min-height: 100vh; /* 页面至少占满一屏 */
+}
+
+a {
+  color: inherit; /* 链接颜色跟随文字颜色 */
+  text-decoration: none; /* 去掉下划线 */
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page {
+  width: 100%;
+}
+
+/* ===================== 顶部 Banner（Hero 区） ===================== */
+.hero {
+  padding: 80px 32px 56px;
+  border-bottom: 1px solid var(--line); /* 底部分割线 */
+}
+
+.hero-inner {
+  max-width: 960px; /* 内容最大宽度 */
+}
+
+.hero-kicker {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase; /* 全大写 */
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(52px, 8vw, 112px); /* 自适应大标题 */
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.hero-desc {
+  max-width: 700px;
+  margin: 20px 0 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* ===================== 作品列表（两列网格） ===================== */
+.works {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 两列布局 */
+  gap: 48px 28px; /* 行间距 48px，列间距 28px */
+  padding: 36px 32px 80px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-image-link {
+  display: block;
+  overflow: hidden; /* 图片放大时不溢出 */
+  background: #f4f4f4;
+}
+
+.work-image {
+  aspect-ratio: 16 / 10; /* 固定比例 */
+  object-fit: cover;
+  transition: transform 0.45s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* ===================== 图片悬停放大效果 ===================== */
+.work-image-link:hover .work-image {
+  transform: scale(1.04);
+  filter: contrast(1.05);
+}
+
+.work-meta {
+  padding-top: 14px;
+}
+
+.work-title {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  position: relative;
+}
+
+/* ===================== 标题下划线动画 ===================== */
+.work-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: #111;
+  transform: scaleX(0); /* 初始不显示 */
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.work-title:hover {
+  transform: translateX(4px); /* 悬停轻微右移 */
+}
+
+.work-title:hover::after {
+  transform: scaleX(1); /* 下划线展开 */
+}
+
+.work-desc {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 560px;
+}
+
+/* ===================== 响应式布局（手机端） ===================== */
+@media (max-width: 900px) {
+  .works {
+    grid-template-columns: 1fr; /* 改为单列 */
+    gap: 36px;
+  }
+
+  .hero {
+    padding: 56px 20px 40px;
+  }
+
+  .works {
+    padding: 28px 20px 64px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+  }
+
+  .work-title {
+    font-size: 24px;
+  }
+
+  /* ===================== 详情页样式 ===================== */
+  .detail-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #555;
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-4px);
+  }
+
+  .detail-title {
+    margin: 0;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1;
+  }
+
+  .detail-subtitle {
+    margin: 14px 0 28px;
+    color: #777;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .detail-hero {
+    margin: 0 0 36px;
+    width: 100%;
+    border: 1px solid var(--line);
+  }
+
+  .detail-section {
+    margin-top: 28px;
+  }
+
+  .detail-section h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+  }
+
+  .detail-section p {
+    margin: 0;
+    line-height: 1.8;
+    color: #222;
+  }
+}

@@ -1,0 +1,117 @@
+---
+import "../styles/global.css";
+
+/* ===================== 作品数据（用于循环渲染） =====================
+   每个对象代表一个作品卡片，包括：
+   - title：作品标题
+   - desc：作品描述
+   - image：封面图片路径
+   - href：点击跳转的详情页链接
+===================================================================== */
+const works = [
+  {
+    title: "Procedural Terrain & Ocean Generator",
+    desc: "Where complex algorithms converge into interactive landscapes.",
+    image: "/images/TerrainGenerator/Cover-PCG.png",
+    href: "/projects/PCG-Landscape"
+  },
+  {
+    title: "Dream Lens",
+    desc: "AI-powered VR documentary experience that explores the boundary between reality and imagination.",
+    image: "/images/DreamLens/Cover-DL.png",
+    href: "/projects/DreamLens"
+  },
+  {
+    title: "Interactable L-System Generator",
+    desc: "Python-based PCG study: L-System generator and visualizer",
+    image: "/images/Lsystem/cover.png",
+    href: "/projects/Lsystem"
+  },
+  {
+    title: "Where Plants Listen?",
+    desc: "A puzzle-action project about interactive systems, feedback, and player flow.",
+    image: "/images/WPL/COVER.png",
+    href: "/projects/WPL"
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===================== 页面标题 ===================== -->
+    <title>Your Name — Game Programmer</title>
+  </head>
+
+  <body>
+    <!-- ===================== 自定义鼠标光标（小圆点） ===================== -->
+    <div class="cursor"></div>
+
+    <main class="page">
+
+      <!-- ===================== 顶部 Banner（Hero 区） ===================== -->
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="hero-kicker">Game Programmer / Technical Designer</p>
+
+          <!-- 主标题（你的名字） -->
+          <h1 class="hero-title">Linzhi Wei</h1>
+
+          <!-- 简短介绍 -->
+          <p class="hero-desc">
+            I build gameplay systems, tools, and interactive prototypes.
+            This site showcases selected game programming projects and experiments.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== 作品展示区 =====================
+           使用 works.map() 动态生成作品卡片
+      ======================================================== -->
+      <section class="works" aria-label="Selected works">
+        {works.map((work) => (
+          <article class="work-card">
+
+            <!-- 作品封面图片（可点击跳转） -->
+            <a class="work-image-link" href={work.href}>
+              <img class="work-image" src={work.image} alt={work.title} />
+            </a>
+
+            <!-- 作品文字信息 -->
+            <div class="work-meta">
+              <a class="work-title" href={work.href}>{work.title}</a>
+              <p class="work-desc">{work.desc}</p>
+            </div>
+
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <script>
+
+
+const cursor = document.querySelector<HTMLElement>(".cursor");
+	
+
+window.addEventListener("mousemove", (e) => {
+  if (!cursor) return;
+  cursor.style.transform = `translate(${e.clientX - 7}px, ${e.clientY - 7}px)`;
+});
+
+      const interactiveElements = document.querySelectorAll("a, img, .work-card");
+
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          cursor?.classList.add("cursor-active");
+        });
+
+        el.addEventListener("mouseleave", () => {
+          cursor?.classList.remove("cursor-active");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,318 @@
+---
+import "../../styles/global.css";
+
+const project = {
+  title: "Dream Lens",
+  subtitle: "An AI-powered VR odyssey exploring the boundary between reality and imagination.",
+  backLink: "/",
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{project.title} | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Playfair+Display:italic&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="cursor"></div> 
+
+    <main class="detail-page">
+      <a class="back-link" href={project.backLink}>
+        <span class="arrow">←</span> Back to Works
+      </a>
+
+      <header class="detail-header">
+        <h1 class="detail-title">{project.title}</h1>
+        <p class="detail-subtitle">{project.subtitle}</p>
+      </header>
+
+      <div class="carousel-viewport group">
+        <div class="carousel-container" id="carousel">
+          <img class="carousel-item" src="/images/DreamLens/Cover-DL.png" alt="1" />
+          <img class="carousel-item" src="/images/DreamLens/DL1.png" alt="2" />
+          <img class="carousel-item" src="/images/DreamLens/DL2.png" alt="3" />
+          <img class="carousel-item" src="/images/DreamLens/DL3.png" alt="4" />
+        </div>
+        
+        <button class="nav-btn prev" id="prevBtn">〈</button>
+        <button class="nav-btn next" id="nextBtn">〉</button>
+        
+        <div class="carousel-dots" id="dots"></div>
+      </div>
+
+      <div class="content-wrapper">
+        <section class="detail-section">
+          <h2>The Artistic Concept</h2>
+          <p class="section-text">
+            <strong>Dream Lens</strong> is an AI VR documentary that explores the space between what we see and what we feel. 
+            Using hand tracking, players interact with the world through two cameras: one <strong>realistic</strong>, showing the environment as it is, 
+            and one <strong>imaginative</strong>, which transforms the same space through mood, atmosphere, and storytelling.
+          </p>
+        </section>
+
+        <section class="detail-section">
+          <h2>Core Interaction Pillars</h2>
+          <div class="algo-grid">
+            <div class="algo-card">
+              <h3>AI Narrative Synthesis</h3>
+              <p>Captured objects are processed by an AI generator to create short stories and emotional tones in real-time based on the recording.</p>
+            </div>
+            <div class="algo-card">
+              <h3>Dynamic Atmospheric Shifts</h3>
+              <p>The environment reshapes itself—visuals, atmosphere, and voice change to shift familiar reality into poetic, reflective dreamscapes.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h2>Experience Highlights</h2>
+          <ul class="highlight-list">
+            <li><strong>Active Meaning-Making:</strong> Players move from passive observers to active creators of narrative through their attention and selection.</li>
+            <li><strong>Dual Environments:</strong> Contrast between a warm, vibrant savannah and a quiet, introspective snowy landscape.</li>
+            <li><strong>Immersive Interpretation:</strong> A reimagined documentary format where the world is not just recorded, but emotionally transformed.</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <style>
+      :root {
+        /* New Dreamy Theme Palette */
+        --accent-color: #a78bfa; /* Soft Lavender */
+        --secondary-accent: #60a5fa; /* Ethereal Blue */
+        --bg-color: #0a0a0f; /* Deep Midnight */
+        --text-main: #f3f4f6; 
+        --text-muted: #9ca3af;
+        --card-bg: rgba(167, 139, 250, 0.08); /* Transparent Lavender */
+      }
+
+      body {
+        background-color: var(--bg-color);
+        /* Subtle radial gradient to feel more "atmospheric" */
+        background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, var(--bg-color) 70%);
+        color: var(--text-main);
+        font-family: 'Inter', -apple-system, sans-serif;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .detail-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      .back-link {
+        display: inline-block;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 40px;
+        transition: color 0.3s ease;
+      }
+      .back-link:hover { color: var(--accent-color); }
+
+      .detail-title {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        /* "Dreamy" Text Gradient */
+        background: linear-gradient(to right, #fff, var(--accent-color), var(--secondary-accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .detail-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin-bottom: 60px;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+      }
+
+      .section-text {
+        color: var(--text-main);
+        font-size: 1.15rem;
+        opacity: 0.9;
+      }
+
+      .detail-section h2 {
+        font-size: 1.6rem;
+        color: #fff;
+        margin-bottom: 24px;
+        border-left: 3px solid var(--accent-color);
+        padding-left: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .algo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .algo-card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid rgba(167, 139, 250, 0.15);
+        backdrop-filter: blur(10px);
+        transition: transform 0.4s ease, border-color 0.4s ease;
+      }
+
+      .algo-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-color);
+      }
+
+      .algo-card h3 {
+        font-size: 1.1rem;
+        color: var(--accent-color);
+        margin-top: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .algo-card p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-bottom: 0;
+        line-height: 1.5;
+      }
+
+      .highlight-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .highlight-list li {
+        margin-bottom: 18px;
+        padding-left: 32px;
+        position: relative;
+        color: var(--text-main);
+        opacity: 0.85;
+      }
+
+      .highlight-list li::before {
+        content: "✦"; /* Star/Sparkle icon for dreamy feel */
+        position: absolute;
+        left: 0;
+        color: var(--accent-color);
+        font-size: 1.2rem;
+      }
+
+      .carousel-viewport {
+        position: relative;
+        width: 100%;
+        margin-bottom: 80px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5);
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+      .carousel-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none; 
+      }
+      .carousel-container::-webkit-scrollbar { display: none; }
+      .carousel-item { flex: 0 0 100%; width: 100%; height: 500px; object-fit: cover; scroll-snap-align: start; }
+      
+      .nav-btn {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1); 
+        backdrop-filter: blur(5px);
+        color: white; border: 1px solid rgba(255,255,255,0.2);
+        width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+        opacity: 0; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: 10; font-size: 1.2rem;
+      }
+      .carousel-viewport:hover .nav-btn { opacity: 1; }
+      .prev { left: 24px; }
+      .next { right: 24px; }
+      .nav-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
+
+      .carousel-dots {
+        position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 12px;
+      }
+      .dot {
+        width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .dot.active { background: var(--accent-color); transform: scale(1.3); box-shadow: 0 0 10px var(--accent-color); }
+
+      .cursor {
+        width: 24px; height: 24px; background: var(--accent-color); border-radius: 50%;
+        position: fixed; pointer-events: none; z-index: 9999;
+        mix-blend-mode: screen; transition: transform 0.15s ease-out;
+        transform: translate(-50%, -50%);
+        filter: blur(2px);
+      }
+      .cursor-active { transform: translate(-50%, -50%) scale(2.5); background: var(--secondary-accent); }
+
+      @media (max-width: 640px) { 
+        .algo-grid { grid-template-columns: 1fr; } 
+        .carousel-item { height: 350px; }
+      }
+    </style>
+
+    <script>
+      // Cursor Logic
+      const cursor = document.querySelector(".cursor") as HTMLElement;
+      if (cursor) {
+        window.addEventListener("mousemove", (e) => {
+          cursor.style.left = `${e.clientX}px`;
+          cursor.style.top = `${e.clientY}px`;
+        });
+      }
+
+      // Carousel Logic
+      const carousel = document.getElementById('carousel') as HTMLElement;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsContainer = document.getElementById('dots');
+      const items = document.querySelectorAll('.carousel-item');
+
+      if (carousel && dotsContainer) {
+        items.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => {
+            carousel.scrollTo({ left: carousel.offsetWidth * i, behavior: 'smooth' });
+          });
+          dotsContainer.appendChild(dot);
+        });
+
+        nextBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+        });
+
+        prevBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+        });
+
+        carousel.addEventListener('scroll', () => {
+          const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+          const dots = document.querySelectorAll('.dot');
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+        });
+      }
+
+      // Interaction Hover States
+      const interactiveElements = document.querySelectorAll("a, img, button, .algo-card");
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", () => cursor?.classList.add("cursor-active"));
+        el.addEventListener("mouseleave", () => cursor?.classList.remove("cursor-active"));
+      });
+    </script>
+  </body>
+</html>

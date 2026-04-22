@@ -1,0 +1,391 @@
+---
+import "../../styles/global.css";
+
+// 项目信息对象（用于页面标题和导航）
+const project = {
+  title: "L-System Generator",
+  subtitle: "Formal Grammar & Recursive Geometries: A Python-based PCG Study",
+  backLink: "/",
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{project.title} | Portfolio</title>
+  </head>
+
+  <body>
+    <div class="cursor"></div> 
+
+    <main class="detail-page">
+      <a class="back-link" href={project.backLink}>
+        <span class="arrow">←</span> Back to Works
+      </a>
+
+      <header class="detail-header">
+        <h1 class="detail-title">{project.title}</h1>
+        <p class="detail-subtitle">{project.subtitle}</p>
+      </header>
+
+      <div class="carousel-viewport group">
+        <div class="carousel-container" id="carousel">
+          <img class="carousel-item" src="/images/LSystem/System1.png" alt="Recursive Branching" />
+          <img class="carousel-item" src="/images/LSystem/System2.png" alt="Koch Snowflake" />
+          <img class="carousel-item" src="/images/LSystem/System3.png" alt="Stochastic Growth" />
+        </div>
+        
+        <button class="nav-btn prev" id="prevBtn">〈</button>
+        <button class="nav-btn next" id="nextBtn">〉</button>
+        
+        <div class="carousel-dots" id="dots"></div>
+      </div>
+
+      <div class="content-wrapper">
+        <section class="detail-section">
+          <h2>The Technical Concept</h2>
+          <p class="section-text">
+            This system implements an <strong>L-System (Lindenmayer System)</strong> generator and visualizer utilizing 
+            Python and the Dear PyGui framework. By interpreting recursive string production rules through 
+            Turtle Graphics logic, the application synthesizes complex geometric structures ranging from 
+            rigid fractals to organic, stochastic branching patterns.
+          </p>
+        </section>
+
+        <section class="detail-section">
+          <h2>Mathematical Derivation & Logic</h2>
+          <div class="algo-grid">
+            <div class="algo-card">
+              <h3>Grammar Parser</h3>
+              <p>Custom iterative string rewriting engine that handles Axiom and Production Rules with optimized memory allocation for deep recursions.</p>
+            </div>
+
+            <div class="algo-card">
+              <h3>Turtle Interpreter</h3>
+              <p>Interprets strings into geometric commands (position, heading, and state stacking) rendered in real-time within a high-performance GUI.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h2>Formal Logic Derivation</h2>
+          <div style="width: 100%; min-height: 300px; background: rgba(255,255,255,0.03); border: 1px dashed #333; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin: 20px 0;">
+             <p style="color: #666; font-style: italic;">[ Placeholder for Derivation Process Images ]</p>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h2>Project Highlights</h2>
+          <ul class="highlight-list">
+            <li><strong>Parametric Control:</strong> Real-time adjustment of axioms, production rules, iterations, and geometric angles via GUI.</li>
+            <li><strong>Stochastic Functions:</strong> Incorporation of random variations to simulate natural, organic growth patterns.</li>
+            <li><strong>Fractal Extension:</strong> Capability to generate classic fractals such as the Koch Snowflake and Sierpinski patterns.</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <style>
+      /* 全局变量（颜色主题） */
+      :root {
+        --accent-color: #34d399; 
+        --bg-color: #050505;
+        --text-main: #eeeeee; /* 主文字颜色 */
+        --text-muted: #b0b0b0; /* 次要文字颜色 */
+      }
+
+      /* 页面基础样式 */
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Inter', -apple-system, sans-serif;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* 页面整体容器 */
+      .detail-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      /* 返回链接 */
+      .back-link {
+        display: inline-block;
+        color: #888;
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 40px;
+        transition: color 0.3s ease;
+      }
+      .back-link:hover { color: white; }
+
+      /* 主标题 */
+      .detail-title {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        /* 渐变文字 */
+        background: linear-gradient(to right, #fff, #888);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* 副标题 */
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin-bottom: 60px;
+      }
+
+      /* 内容文字 */
+      .section-text {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+      }
+
+      /* 小节标题 */
+      .detail-section h2 {
+        font-size: 1.5rem;
+        color: #fff;
+        margin-bottom: 20px;
+        border-left: 3px solid var(--accent-color);
+        padding-left: 15px;
+      }
+
+      /* 算法卡片网格布局 */
+      .algo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      /* 算法卡片 */
+      .algo-card {
+        background: rgba(255,255,255,0.05);
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .algo-card h3 {
+        font-size: 1rem;
+        color: var(--accent-color);
+        margin-top: 0;
+      }
+
+      .algo-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 0;
+      }
+
+      /* 项目亮点列表 */
+      .highlight-list {
+        list-style: none;
+        padding: 0;
+        color: var(--text-muted);
+      }
+
+      .highlight-list li {
+        margin-bottom: 12px;
+        padding-left: 24px;
+        position: relative;
+      }
+
+      /* 自定义箭头 */
+      .highlight-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent-color);
+      }
+
+      /* ===== 轮播图样式 ===== */
+
+      .carousel-viewport {
+        position: relative;
+        width: 100%;
+        margin-bottom: 80px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      /* 横向滚动容器 */
+      .carousel-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory; /* 吸附滚动 */
+        scroll-behavior: smooth;
+        scrollbar-width: none; 
+      }
+
+      /* 隐藏滚动条 */
+      .carousel-container::-webkit-scrollbar { display: none; }
+
+      /* 每张图片 */
+      .carousel-item { 
+        flex: 0 0 100%; 
+        width: 100%; 
+        object-fit: cover; 
+        scroll-snap-align: start; 
+      }
+
+      /* 左右按钮 */
+      .nav-btn {
+        position: absolute; 
+        top: 50%; 
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.6); 
+        color: white; 
+        border: none;
+        width: 45px; 
+        height: 45px; 
+        border-radius: 50%; 
+        cursor: pointer;
+        opacity: 0; 
+        transition: all 0.3s; 
+        z-index: 10; 
+        font-size: 1.2rem;
+      }
+
+      /* hover 时显示按钮 */
+      .carousel-viewport:hover .nav-btn { opacity: 1; }
+
+      .prev { left: 20px; }
+      .next { right: 20px; }
+
+      /* 底部小圆点 */
+      .carousel-dots {
+        position: absolute; 
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%);
+        display: flex; 
+        gap: 10px;
+      }
+
+      .dot {
+        width: 8px; 
+        height: 8px; 
+        border-radius: 50%; 
+        background: rgba(255,255,255,0.3); 
+        cursor: pointer;
+      }
+
+      .dot.active { 
+        background: var(--accent-color); 
+        transform: scale(1.2); 
+      }
+
+      /* ===== 自定义鼠标 ===== */
+
+      .cursor {
+        width: 20px; 
+        height: 20px; 
+        background: white; 
+        border-radius: 50%;
+        position: fixed; 
+        pointer-events: none; 
+        z-index: 9999;
+        mix-blend-mode: difference; 
+        transition: transform 0.1s ease-out;
+        transform: translate(-50%, -50%);
+      }
+
+      /* 鼠标悬停放大效果 */
+      .cursor-active { transform: scale(3); }
+
+      /* 响应式 */
+      @media (max-width: 640px) { 
+        .algo-grid { grid-template-columns: 1fr; } 
+      }
+    </style>
+
+    <script>
+      // ===== 1. 自定义鼠标逻辑 =====
+      const cursor = document.querySelector(".cursor") as HTMLElement;
+
+      if (cursor) {
+        // 跟随鼠标移动
+        window.addEventListener("mousemove", (e) => {
+          cursor.style.left = `${e.clientX}px`;
+          cursor.style.top = `${e.clientY}px`;
+        });
+      }
+
+      // ===== 2. 轮播图逻辑 =====
+      const carousel = document.getElementById('carousel') as HTMLElement;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsContainer = document.getElementById('dots');
+      const items = document.querySelectorAll('.carousel-item');
+
+      if (carousel && dotsContainer) {
+
+        // 动态生成底部小圆点
+        items.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+
+          // 默认第一个激活
+          if (i === 0) dot.classList.add('active');
+
+          // 点击跳转到对应图片
+          dot.addEventListener('click', () => {
+            carousel.scrollTo({ 
+              left: carousel.offsetWidth * i, 
+              behavior: 'smooth' 
+            });
+          });
+
+          dotsContainer.appendChild(dot);
+        });
+
+        // 下一张按钮
+        nextBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ 
+            left: carousel.offsetWidth, 
+            behavior: 'smooth' 
+          });
+        });
+
+        // 上一张按钮
+        prevBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ 
+            left: -carousel.offsetWidth, 
+            behavior: 'smooth' 
+          });
+        });
+
+        // 根据滚动位置更新激活的圆点
+        carousel.addEventListener('scroll', () => {
+          const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+          const dots = document.querySelectorAll('.dot');
+
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+        });
+      }
+
+      // ===== 3. 交互反馈（鼠标放大） =====
+      const interactiveElements = document.querySelectorAll("a, img, button, .algo-card");
+
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", () => 
+          cursor?.classList.add("cursor-active")
+        );
+
+        el.addEventListener("mouseleave", () => 
+          cursor?.classList.remove("cursor-active")
+        );
+      });
+    </script>
+  </body>
+</html>

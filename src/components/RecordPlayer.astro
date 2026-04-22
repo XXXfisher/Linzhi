@@ -1,0 +1,56 @@
+---
+const { src = "/music/bgm.mp3" } = Astro.props;
+---
+
+<div class="recordWrap" data-record-player>
+  <button class="record is-paused" type="button" aria-label="Play/Pause"></button>
+  <audio src={src} loop preload="auto"></audio>
+
+  <script is:inline>
+    // 只找当前组件这一块
+    const root = document.currentScript.closest("[data-record-player]");
+    if (!root) console.error("RecordPlayer: root not found");
+
+    const record = root?.querySelector(".record");
+    const bgm = root?.querySelector("audio");
+
+    if (!(record instanceof HTMLButtonElement)) {
+      console.error("RecordPlayer: .record not found");
+    }
+    if (!(bgm instanceof HTMLAudioElement)) {
+      console.error("RecordPlayer: audio not found");
+    }
+    if (!(record instanceof HTMLButtonElement) || !(bgm instanceof HTMLAudioElement)) {
+      // 找不到元素就直接停止
+      throw new Error("RecordPlayer init failed");
+    }
+
+    let playing = false;
+
+    async function play() {
+      try {
+        await bgm.play(); // 注意：可能被浏览器拦截，需用户点击
+        playing = true;
+        record.classList.remove("is-paused");
+      } catch (e) {
+        console.error("RecordPlayer: play() blocked or failed", e);
+        playing = false;
+        record.classList.add("is-paused");
+      }
+    }
+
+    function pause() {
+      bgm.pause();
+      playing = false;
+      record.classList.add("is-paused");
+    }
+
+    record.addEventListener("click", async () => {
+      if (playing) pause();
+      else await play();
+    });
+
+    // 默认尝试播放（被拦截也没事，用户点唱片即可）
+    play();
+  </script>
+</div>
