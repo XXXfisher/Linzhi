@@ -114,6 +114,25 @@ img {
   color: #333;
 }
 
+/* ================= Video Embed ================= */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin-top: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;          /* 比 top/left 更干净 */
+  width: 100%;
+  height: 100% !important; /* 👈 关键：防止被全局覆盖 */
+  border: none;
+}
+
 /* ===================== 作品列表（两列网格） ===================== */
 .works {
   display: grid;
@@ -264,4 +283,6 @@ img {
     line-height: 1.8;
     color: #222;
   }
+
+
 }

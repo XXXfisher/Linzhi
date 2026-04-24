@@ -40,6 +40,8 @@ const project = {
         <div class="carousel-dots" id="dots"></div>
       </div>
 
+
+
       <div class="content-wrapper">
         <section class="detail-section">
           <h2>The Technical Concept</h2>
@@ -48,7 +50,17 @@ const project = {
             Instead of manual modeling, it leverages pure mathematical algorithms to synthesize complex natural geometries 
             in real-time. It's an exploration of how code can mimic the organic patterns of our world.
           </p>
+
+          <div class="video-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/75sq1oWCncY"
+               title="YouTube video player"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               allowfullscreen>
+            </iframe>
+          </div>
         </section>
+
 
         <section class="detail-section">
           <h2>Core Algorithms</h2>
@@ -226,6 +238,8 @@ const project = {
       }
       .cursor-active { transform: scale(3); }
 
+
+
       @media (max-width: 640px) { .algo-grid { grid-template-columns: 1fr; } }
     </style>
 
@@ -245,6 +259,8 @@ const project = {
       const nextBtn = document.getElementById('nextBtn');
       const dotsContainer = document.getElementById('dots');
       const items = document.querySelectorAll('.carousel-item');
+
+      
 
       if (carousel && dotsContainer) {
         // 生成指示点
@@ -284,5 +300,8 @@ const project = {
         el.addEventListener("mouseleave", () => cursor?.classList.remove("cursor-active"));
       });
     </script>
+
+
+
   </body>
 </html>
